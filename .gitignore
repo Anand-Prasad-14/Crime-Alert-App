@@ -10,10 +10,10 @@
 .svn/
 migrate_working_dir/
 .gradle/
-.ios/
-.linux/
-.windows/
-#
+/ios/
+/linux/
+/windows/
+
 
 # IntelliJ related
 *.iml
