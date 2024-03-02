@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:secure_alert/utils/theme.dart';
 
+// ignore: must_be_immutable
 class SendEmail extends StatefulWidget {
   String title;
 

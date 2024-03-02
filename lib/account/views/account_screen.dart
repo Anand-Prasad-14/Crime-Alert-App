@@ -7,6 +7,7 @@ import 'package:secure_alert/utils/bottom_navigation.dart';
 import 'package:secure_alert/utils/custom_widgets.dart';
 
 import '../../utils/theme.dart';
+import '../components/notification.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -28,7 +29,7 @@ class _AccountScreenState extends State<AccountScreen> {
     }
     AwesomeNotifications().setListeners(
         onActionReceivedMethod: (ReceivedAction receivedAction) {
-      NotficationController.onActionReceivedMethod(receivedAction);
+      NotificationController.onActionReceivedMethod(receivedAction);
       return val;
     });
   }
@@ -149,12 +150,10 @@ class _AccountScreenState extends State<AccountScreen> {
                                 //Notification();
                                 setState(() {
                                   if (isSwitched) {
-                                    NotificationController
-                                        .dismissNotification();
+                                    NotificationController.dismissNotification();
                                     isSwitched = false;
                                   } else {
-                                    NotificationController
-                                        .createSOSNotification();
+                                    NotificationController.createSOSNotification();
                                     isSwitched = true;
                                   }
                                 });

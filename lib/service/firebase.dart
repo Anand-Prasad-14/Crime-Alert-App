@@ -90,3 +90,27 @@ Future getPostData(String postID) async {
   }
 }
 
+//SOS methods
+Future getSOSData(String userID) async {
+  final snapshot = await databaseReference.child('sos/$userID').get();
+  if (snapshot.exists) {
+    return snapshot.value;
+  } else {
+    print('No data available.');
+  }
+}
+
+Future getRecipientContact(String userId) async {
+  List<String> recipientList = [];
+  final contactRef = FirebaseDatabase.instance.ref().child('contacts/$userId');
+  contactRef.onValue.listen((event) async {
+    for (final child in event.snapshot.children) {
+      final contactID = await json.decode(json.encode(child.key));
+      Map data = await json.decode(json.encode(child.value));
+
+      recipientList.add(data["contactNo"]);
+    }
+  });
+  return recipientList;
+}
+
