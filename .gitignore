@@ -13,7 +13,7 @@ migrate_working_dir/
 /ios/
 /linux/
 /windows/
-
+#
 
 # IntelliJ related
 *.iml
@@ -36,9 +36,6 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-/ios/
-/linux/
-/windows/
 
 # Symbolication related
 app.*.symbols
