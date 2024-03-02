@@ -20,7 +20,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Defender360',
+      title: 'Defender3601',
       theme: ThemeData(primarySwatch: Colors.blue),
       initialRoute: '/',
       routes: {
