@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'theme.dart';
+
 AppBar customAppBar(
     {String? title,
     IconButton? iconButton,
@@ -47,5 +49,44 @@ AppBar customAppBarAction(
             ),
       )
     ],
+  );
+}
+
+getTextField(
+    {String? text,
+    String? valError,
+    bool? readonly,
+    Function(String)? onChanged,
+    bool? obscureText,
+    String? Function(String?)? validator,
+    bool isEdit = false,
+    TextInputType? keyboardType,
+    int? minLines,
+    int? maxLines,
+    InputDecoration? decoration}) {
+  TextEditingController controller = TextEditingController();
+  if (isEdit) {
+    controller.text = text!;
+  }
+  return Container(
+    padding: const EdgeInsets.only(bottom: 20),
+    decoration: ThemeHelper().inputBoxDecorationShaddow(),
+    child: TextFormField(
+      controller: isEdit ? controller : null,
+      minLines: minLines,
+      maxLines: maxLines,
+      keyboardType: keyboardType,
+      readOnly: readonly ?? false,
+      obscureText: obscureText ?? false,
+      decoration: decoration,
+      onChanged: onChanged,
+      validator: validator ??
+          (val) {
+            if (val!.isEmpty) {
+              return valError;
+            }
+            return null;
+          },
+    ),
   );
 }
