@@ -1,5 +1,6 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
+import 'package:secure_alert/account/components/contact_popup.dart';
 import 'package:secure_alert/account/components/send_email.dart';
 import 'package:secure_alert/service/firebase.dart';
 import 'package:secure_alert/service/global.dart';
@@ -325,7 +326,7 @@ class _AccountScreenState extends State<AccountScreen> {
     return showDialog(
         context: context,
         builder: (BuildContext context) {
-          return AddEmergencyContact(
+          return EmergencyContact(
             mapEdit: null,
             onEdit: (value) {},
           );
