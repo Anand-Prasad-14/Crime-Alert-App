@@ -9,6 +9,7 @@ import 'package:secure_alert/utils/custom_widgets.dart';
 
 import '../../utils/theme.dart';
 import '../components/notification.dart';
+import '../components/sos_setting_popup.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -337,7 +338,7 @@ class _AccountScreenState extends State<AccountScreen> {
     return showDialog(
         context: context,
         builder: (BuildContext context) {
-          return SosSettingsPopUp();
+          return const SosSettingsPopUp();
         });
   }
 }
