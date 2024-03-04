@@ -114,3 +114,25 @@ Future getRecipientContact(String userId) async {
   return recipientList;
 }
 
+Future editAvatarPostList() async {
+  final postRef = FirebaseDatabase.instance.ref().child('post');
+  await postRef.onValue.listen((event) async {
+    
+    for (var child in event.snapshot.children) {
+      
+      final postID = await jsonDecode(jsonEncode(child.key));
+      Map data = await json.decode(json.encode(child.value));
+
+      //If post is created by currentuser
+      if (Global.instance.user!.uId == data['userID']) {
+        //update user avatar
+        postRef.child(postID).update({
+          "avatar": Global.instance.user!.avatar,
+        });
+      }
+    }
+  },
+  onError: (error){
+    print('Error getting post List');
+  });
+}
