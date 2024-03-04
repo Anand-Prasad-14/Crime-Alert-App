@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:secure_alert/account/views/account_screen.dart';
+import 'package:secure_alert/account/views/help_center_view.dart';
 import 'package:secure_alert/authenticate/views/login_screen.dart';
 import 'package:secure_alert/authenticate/views/register_screen.dart';
 import 'package:secure_alert/authenticate/views/splash_scrreen.dart';
@@ -28,8 +30,9 @@ class _MyAppState extends State<MyApp> {
         '/home': (context) => const HomePage(),
         '/login':(context) => const LoginScreen(),
         '/register':(context) => const RegisterScreen(),
-        
+        '/account':(context) => const AccountScreen(),
         '/crimeAlert':(context) => const CrimeAlertView(),
+        '/helpCenter':(context) => const HelpCenterView()
         
       },
     );

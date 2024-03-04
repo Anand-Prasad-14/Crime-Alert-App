@@ -1,18 +1,16 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:secure_alert/account/components/send_email.dart';
 import 'package:secure_alert/utils/custom_widgets.dart';
 import 'package:secure_alert/utils/theme.dart';
 
-class _HelpCenterViewState extends StatefulWidget {
-  const _HelpCenterViewState();
+class HelpCenterView extends StatefulWidget {
+  const HelpCenterView({super.key});
 
   @override
-  State<_HelpCenterViewState> createState() => __HelpCenterViewStateState();
+  State<HelpCenterView> createState() => _HelpCenterViewState();
 }
 
-class __HelpCenterViewStateState extends State<_HelpCenterViewState> {
+class _HelpCenterViewState extends State<HelpCenterView> {
   double height = 0;
   double width = 0;
 
