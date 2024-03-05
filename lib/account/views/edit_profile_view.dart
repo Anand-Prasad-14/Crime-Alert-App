@@ -13,6 +13,7 @@ import 'package:secure_alert/utils/custom_widgets.dart';
 import 'package:secure_alert/utils/theme.dart';
 
 import '../../authenticate/models/user_model.dart';
+import '../../service/firebase.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});

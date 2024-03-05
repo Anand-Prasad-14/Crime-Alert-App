@@ -169,10 +169,13 @@ class ThemeHelper {
                     child: icon,
                   )
                 : Container(),
-            Text(
-              text!,
-              textAlign: TextAlign.center,
-            ),
+            Flexible(
+              fit: FlexFit.tight,
+              child: Text(
+                text!,
+                textAlign: TextAlign.center,
+              ),
+            )
           ]),
         ));
   }

@@ -227,7 +227,7 @@ class _AccountScreenState extends State<AccountScreen> {
                   Container(
                     child: ThemeHelper().getCustomButton(
                         text: "Sign In",
-                        padding: 115,
+                        padding: 100,
                         background: Colors.black,
                         fontSize: 20,
                         onPressed: () {
@@ -237,7 +237,7 @@ class _AccountScreenState extends State<AccountScreen> {
                   Container(
                     child: ThemeHelper().getCustomButton(
                         text: "Register",
-                        padding: 110,
+                        padding: 100,
                         background: Colors.red.shade900,
                         fontSize: 20,
                         onPressed: () {

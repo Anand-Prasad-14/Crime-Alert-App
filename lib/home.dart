@@ -37,6 +37,12 @@ class _HomePageState extends State<HomePage> {
                   "Post Feed",
                   'Get and share the latest info, missing reports, alerts and more',
                   '/postFeed',
+                  Icons.dynamic_feed),
+                  
+              homepageButton(
+                  "Account",
+                  'Manage your account, emergency contacts and other settings',
+                  '/account',
                   Icons.person)
             ],
           ),
@@ -62,18 +68,18 @@ class _HomePageState extends State<HomePage> {
       String text, String info, String routeName, IconData icon) {
     return GestureDetector(
       child: Container(
-        width: 180,
-        height: 200,
+        width: 176,
+        height: 195,
         decoration: BoxDecoration(
             color: Colors.red.shade900.withOpacity(0.1),
             borderRadius: const BorderRadius.all(Radius.circular(10.0))),
         child: Padding(
-          padding: const EdgeInsets.only(top: 15, bottom: 15, right: 10),
+          padding: const EdgeInsets.only(top: 15, bottom: 15, right: 5),
           child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 30, right: 5),
+                  padding: const EdgeInsets.only(top: 30, right: 8),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [iconDesign(icon)],
