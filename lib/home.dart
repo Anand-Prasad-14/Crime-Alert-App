@@ -24,7 +24,12 @@ class _HomePageState extends State<HomePage> {
                   "Crime Alerts",
                   'Locate the crimes in the nearby areas',
                   '/crimeAlert',
-                  Icons.map)
+                  Icons.map),
+              homepageButton(
+                  "Crime Report",
+                  'File a crime report anywhere, anytime with ease',
+                  '/crimeReport',
+                  Icons.local_police)
             ],
           ),
           const SizedBox(
@@ -38,7 +43,6 @@ class _HomePageState extends State<HomePage> {
                   'Get and share the latest info, missing reports, alerts and more',
                   '/postFeed',
                   Icons.dynamic_feed),
-                  
               homepageButton(
                   "Account",
                   'Manage your account, emergency contacts and other settings',

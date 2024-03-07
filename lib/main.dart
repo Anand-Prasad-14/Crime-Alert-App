@@ -7,6 +7,7 @@ import 'package:secure_alert/authenticate/views/login_screen.dart';
 import 'package:secure_alert/authenticate/views/register_screen.dart';
 import 'package:secure_alert/authenticate/views/splash_scrreen.dart';
 import 'package:secure_alert/crime_alert/views/crime_alert_view.dart';
+import 'package:secure_alert/crime_report/views/crime_report_view.dart';
 import 'package:secure_alert/home.dart';
 import 'package:secure_alert/service/global.dart';
 import 'package:secure_alert/service/logger.dart';
@@ -63,6 +64,7 @@ class _MyAppState extends State<MyApp> {
         '/register': (context) => const RegisterScreen(),
         '/account': (context) => const AccountScreen(),
         '/crimeAlert': (context) => const CrimeAlertView(),
+        '/crimeReport':(context) => const CrimeReportScreen(),
         '/helpCenter': (context) => const HelpCenterView(),
         '/editProfile': (context) => const EditProfile()
       },
