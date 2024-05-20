@@ -58,11 +58,23 @@ dependencies:
   flutter_sms: 
     path: C:/Users/Asus/Documents/flutter_sms-master
   font_awesome_flutter: ^10.7.0
+  http: ^0.13.6
+  firebase_core: ^2.18.0
+  uuid: ^4.2.2
+  dcdg: ^4.1.0
+  
+  
   
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.9.2
+  
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/logo.png"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
