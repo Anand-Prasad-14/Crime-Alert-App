@@ -1,7 +1,8 @@
 import 'package:logger/logger.dart';
 import 'package:stack_trace/stack_trace.dart';
 
-final logger = () => Logger(printer: CustomPrinter.instance, level: Level.verbose);
+final logger =
+    () => Logger(printer: CustomPrinter.instance, level: Level.verbose);
 
 class CustomPrinter extends LogPrinter {
   static CustomPrinter _customPrinter = CustomPrinter();
@@ -22,7 +23,7 @@ class CustomPrinter extends LogPrinter {
   List<String> log(LogEvent event) {
     int index = trace.indexOf(".");
     if (index != -1) {
-      clName = trace.substring(0,index).trim();
+      clName = trace.substring(0, index).trim();
       mlName = trace.substring(index + 1).trim();
     } else {
       clName = trace;

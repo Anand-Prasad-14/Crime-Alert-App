@@ -26,8 +26,14 @@ class _AccountScreenState extends State<AccountScreen> {
   @override
   void initState() {
     super.initState();
-    if (Global.instance.user!.isLoggedIn) {
-      url = Global.instance.user!.avatar!;
+    /*
+    if (Global.instance.user != null && Global.instance.user!.isLoggedIn) {
+      if (Global.instance.user!.avatar != null) {
+        url = Global.instance.user!.avatar!;
+      }
+    }*/
+    if(Global.instance.user!.isLoggedIn){
+    url = Global.instance.user!.avatar!;
     }
     AwesomeNotifications().setListeners(
         onActionReceivedMethod: (ReceivedAction receivedAction) {
@@ -75,7 +81,7 @@ class _AccountScreenState extends State<AccountScreen> {
                               Text(
                                 Global.instance.user!.firstName!,
                                 style: const TextStyle(
-                                    fontSize: 25, fontWeight: FontWeight.bold),
+                                    fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               TextButton(
                                   onPressed: () {
@@ -103,7 +109,7 @@ class _AccountScreenState extends State<AccountScreen> {
                       ],
                     ),
                   ),
-                  
+
                   Container(
                     padding:
                         const EdgeInsets.only(top: 15, right: 10, left: 10),
@@ -118,7 +124,7 @@ class _AccountScreenState extends State<AccountScreen> {
                               Navigator.of(context).pushNamed('/helpCenter');
                             }),
                         getTextButton(
-                            text: "My Post",
+                            text: "Your Post Feed",
                             onTap: () {
                               Navigator.of(context).pushNamed('/myPost');
                             }),
@@ -152,10 +158,12 @@ class _AccountScreenState extends State<AccountScreen> {
                                 //Notification();
                                 setState(() {
                                   if (isSwitched) {
-                                    NotificationController.dismissNotification();
+                                    NotificationController
+                                        .dismissNotification();
                                     isSwitched = false;
                                   } else {
-                                    NotificationController.createSOSNotification();
+                                    NotificationController
+                                        .createSOSNotification();
                                     isSwitched = true;
                                   }
                                 });
@@ -286,7 +294,7 @@ class _AccountScreenState extends State<AccountScreen> {
               image: DecorationImage(
                 image: NetworkImage(url!),
                 fit: BoxFit.cover,
-              ), 
+              ),
               borderRadius: const BorderRadius.all(Radius.circular(50.0)),
               border: Border.all(
                 color: Colors.red.shade900,
@@ -298,7 +306,7 @@ class _AccountScreenState extends State<AccountScreen> {
             height: 85.0,
             width: 80,
             decoration: BoxDecoration(
-              color: Colors.white, 
+              color: Colors.white,
               borderRadius: const BorderRadius.all(Radius.circular(50.0)),
               border: Border.all(
                 color: Colors.red.shade900,

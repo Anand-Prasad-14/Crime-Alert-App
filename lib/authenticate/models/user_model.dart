@@ -1,6 +1,4 @@
-import '../../service/logger.dart';
-
-class User{
+class User {
   bool isLoggedIn = false;
   String? uId;
   String? firstName;
@@ -14,14 +12,12 @@ class User{
   String? country;
   String? state;
   String? city;
-  String? pinCode;
-
-  final _log = logger();
+  String? zipcode;
 
   User();
   User.otherUser(this.avatar, this.firstName);
 
-  void setUserInfo(String userID, Map data){
+  void setUserInfo(String userID, Map data) {
     isLoggedIn = true;
     uId = userID;
     firstName = data['firstName'];
@@ -34,10 +30,10 @@ class User{
     country = data['country'];
     state = data['state'];
     city = data['city'];
-    pinCode = data['pincode'];
+    zipcode = data['pincode'];
   }
 
-  clearUserInfo(){
+  clearUserInfo() {
     isLoggedIn = false;
     uId = null;
     firstName = null;
@@ -50,6 +46,6 @@ class User{
     country = null;
     state = null;
     city = null;
-    pinCode = null;
+    zipcode = null;
   }
 }

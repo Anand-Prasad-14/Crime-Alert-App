@@ -24,7 +24,7 @@ class _EmergencyContactState extends State<EmergencyContact> {
   String? id;
   String? fname = "";
   String? relation = "";
-  String? mobileNo = "";
+  String? contactNo = "";
 
   String uID = Global.instance.user!.uId!;
 
@@ -49,7 +49,7 @@ class _EmergencyContactState extends State<EmergencyContact> {
       id = widget.mapEdit.id;
       fname = widget.mapEdit.fname;
       relation = widget.mapEdit.relation;
-      mobileNo = widget.mapEdit.mobileNo;
+      contactNo = widget.mapEdit.contactNo;
     }
     super.initState();
   }
@@ -76,8 +76,8 @@ class _EmergencyContactState extends State<EmergencyContact> {
                 }),
             isEdit ? editRelationField() : relationField(),
             getTextField(
-                text: mobileNo,
-                label: 'Mobile No',
+                text: contactNo,
+                label: 'Contact Number',
                 hint: 'Enter the contact no. of the person',
                 validator: (val) {
                   if (val!.isEmpty) {
@@ -89,7 +89,7 @@ class _EmergencyContactState extends State<EmergencyContact> {
                   return null;
                 },
                 onChanged: (value) {
-                  mobileNo = value;
+                  contactNo = value;
                 })
           ],
         )),
@@ -113,7 +113,7 @@ class _EmergencyContactState extends State<EmergencyContact> {
                         MaterialStateProperty.all(Colors.red.shade900)),
                 onPressed: () {
                   setState(() {
-                    var contact = Contact(id!, fname!, relation!, mobileNo);
+                    var contact = Contact(id!, fname!, relation!, contactNo);
                     widget.onEdit(contact);
                     Navigator.of(context).pop();
                   });
@@ -128,15 +128,15 @@ class _EmergencyContactState extends State<EmergencyContact> {
                   setState(() {
                     DatabaseReference contactRef = FirebaseDatabase.instance
                         .ref()
-                        .child('contact')
+                        .child('contacts')
                         .child(uID);
 
                     String contactID = contactRef.push().key!;
 
                     contactRef.child(contactID).set({
-                      'fname': fname,
+                      'firstName': fname,
                       'relation': relation,
-                      'mobileNo': mobileNo,
+                      'phone': contactNo,
                     });
 
                     Fluttertoast.showToast(

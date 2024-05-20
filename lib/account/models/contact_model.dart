@@ -2,7 +2,7 @@ class Contact {
   String? id;
   String? fname;
   String? relation;
-  String? mobileNo;
+  String? contactNo;
 
-  Contact(String s, String t, String u, String? mobileNo);
+  Contact(this.id, this.fname, this.relation, this.contactNo );
 }

@@ -37,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Container(
             padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
             margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-            child:  Column(children: [
+            child: Column(children: [
               const Text(
                 'Welcome Back',
                 style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
@@ -59,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           validator: (val) {
                             if (val!.isEmpty) {
                               return 'Please enter your email!';
-                            } else if (!(val.isEmpty) &&
+                            } else if (val.isNotEmpty &&
                                 !RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$")
                                     .hasMatch(val)) {
                               return "Enter a valid email";
@@ -108,7 +108,8 @@ class _LoginScreenState extends State<LoginScreen> {
       String? hint,
       String? valError,
       Function(String)? onChanged,
-      String? Function(String?)? validator,  bool? obscureText}) {
+      String? Function(String?)? validator,
+      bool? obscureText}) {
     return Container(
       padding: const EdgeInsets.only(bottom: 20),
       decoration: ThemeHelper().inputBoxDecorationShaddow(),
@@ -166,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
             Fluttertoast.showToast(msg: "User Logged In Successfully");
             Navigator.of(context)
-                .pushNamedAndRemoveUntil('/home', (route) => false);
+                .pushNamedAndRemoveUntil('/account', (route) => false);
           }
         },
       ),

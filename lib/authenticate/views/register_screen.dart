@@ -436,7 +436,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           FirebaseDatabase.instance.ref().child('users');
 
       userRef.child(uID.toString()).set({
-        'fname': fName,
+        'firstName': fName,
         'iNo': iNo,
         'email': email,
         'dob': dob,
@@ -446,7 +446,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         'country': countryValue,
         'state': stateValue,
         'city': cityValue,
-        'zipCode': zipcode
+        'pincode': zipcode
       });
 
       Fluttertoast.showToast(msg: "Account created successfully");

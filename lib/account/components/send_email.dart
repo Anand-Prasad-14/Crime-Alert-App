@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:secure_alert/utils/theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 
-// ignore: must_be_immutable
 class SendEmail extends StatefulWidget {
-  String title;
+  final String title;
 
-  SendEmail({
-    Key? key,
-    required this.title
-  }) : super(key: key);
-  
+  SendEmail({Key? key, required this.title}) : super(key: key);
 
   @override
   State<SendEmail> createState() => _SendEmailState();
@@ -19,57 +15,100 @@ class _SendEmailState extends State<SendEmail> {
   String? message;
   String? email;
 
+  final databaseReference = FirebaseDatabase.instance.ref().child('feedback');
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  @override
+  void initState() {
+    _fetchUserEmail();
+    super.initState();
+  }
+
+  void _fetchUserEmail() async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      setState(() {
+        email = user.email;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('send ${widget.title}'),
+      title: Text(
+        'Send ${widget.title}',
+        style: const TextStyle(color: Color.fromARGB(255, 192, 43, 43)),
+      ),
       scrollable: true,
-      content: Padding(padding: const EdgeInsets.all(5.0),
-      child: Form(child: Column(
-        children: <Widget>[
-          getEmailField(),
-          getMessageField()
-        ],
-      )),),
+      content: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: Form(
+          child: Column(
+            children: <Widget>[
+              getEmailField(),
+              getMessageField(),
+            ],
+          ),
+        ),
+      ),
       actions: [
-        ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.black)),
-        child: const Text("Cancel", style: TextStyle(
-          color: Colors.white
-        ),),
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
+        ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.black),
+          ),
+          child: const Text(
+            "Cancel",
+            style: TextStyle(color: Colors.white),
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
         ),
         ElevatedButton(
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.red.shade900)
+            backgroundColor: MaterialStateProperty.all(Colors.red.shade900),
           ),
-          child: const Text("Send", style: TextStyle(
-            color: Colors.white
-          ),),
+          child: const Text(
+            "Send",
+            style: TextStyle(color: Colors.white),
+          ),
           onPressed: () {
-            Navigator.of(context).pop();
+            _uploadFeedback();
           },
         )
       ],
     );
   }
 
-  getEmailField(){
+  Widget getEmailField() {
     return Container(
       padding: const EdgeInsets.only(bottom: 10),
-      decoration: ThemeHelper().inputBoxDecorationShaddow(),
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
       child: TextFormField(
+        initialValue: email,
         keyboardType: TextInputType.emailAddress,
-        decoration: ThemeHelper().textInputDecoration("Email Address", "Enter the email address"),
-        onChanged: (val){
+        decoration: const InputDecoration(
+          labelText: "Email Address",
+          hintText: "Enter the email address",
+        ),
+        onChanged: (val) {
           setState(() {
             email = val;
           });
         },
         validator: (val) {
-          if (val!.isEmpty){
-            return "Emial Address is required";
+          if (val!.isEmpty) {
+            return "Email Address is required";
           }
           return null;
         },
@@ -77,15 +116,26 @@ class _SendEmailState extends State<SendEmail> {
     );
   }
 
-  getMessageField(){
+  Widget getMessageField() {
     return Container(
       padding: const EdgeInsets.only(bottom: 10),
-      decoration: ThemeHelper().inputBoxDecorationShaddow(),
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
       child: TextFormField(
         minLines: 8,
         maxLines: 12,
         keyboardType: TextInputType.multiline,
-        decoration: ThemeHelper().textInputDecoReport("Enter the ${widget.title} message"),
+        decoration: InputDecoration(
+          labelText: "Enter the ${widget.title} message",
+        ),
         onChanged: (val) {
           setState(() {
             message = val;
@@ -99,5 +149,30 @@ class _SendEmailState extends State<SendEmail> {
         },
       ),
     );
+  }
+
+  void _uploadFeedback() async {
+    if (email != null && message != null) {
+      try {
+        await databaseReference.push().set({
+          'email': email,
+          'message': message,
+          'title': widget.title,
+          'timestamp': DateTime.now().toString(),
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Feedback sent successfully')),
+        );
+        Navigator.of(context).pop();
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: $e')),
+        );
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Email and Message are required')),
+      );
+    }
   }
 }
