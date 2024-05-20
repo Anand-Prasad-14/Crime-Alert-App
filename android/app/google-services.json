@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "468402823127",
+    "project_id": "crime-alert-e1c3c",
+    "storage_bucket": "crime-alert-e1c3c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:468402823127:android:f796c18d48ec78cbfd3592",
+        "android_client_info": {
+          "package_name": "com.example.secure_alert"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9l94A3DGGGiospTeV0yzChpOq31PvU4g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
