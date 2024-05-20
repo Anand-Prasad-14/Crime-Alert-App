@@ -29,8 +29,8 @@ class _CrimeAlertViewState extends State<CrimeAlertView> {
   Set<Marker> markersList = {};
   List<Alert> alerts = [];
 
-  double lng = 2.814014;
-  double lat = 101.758337;
+  double lng = 19.1335;
+  double lat = 72.8541;
   late GoogleMapController googleMapController;
 
   final Mode _mode = Mode.overlay;
@@ -43,13 +43,13 @@ class _CrimeAlertViewState extends State<CrimeAlertView> {
 
       markersList.add(Marker(
           markerId: const MarkerId("0"),
-          position: LatLng(lng, lat),
+          position: LatLng(lat, lng),
           icon: BitmapDescriptor.defaultMarkerWithHue(
               BitmapDescriptor.hueViolet)));
     });
 
     googleMapController.animateCamera(CameraUpdate.newCameraPosition(
-        CameraPosition(target: LatLng(lng, lat), zoom: 14.0)));
+        CameraPosition(target: LatLng(lat, lng), zoom: 14.0)));
     getCrimeAlerts();
   }
 
@@ -61,8 +61,13 @@ class _CrimeAlertViewState extends State<CrimeAlertView> {
         final alertID = await json.decode(json.encode(child.key));
         Map data = await json.decode(json.encode(child.value));
 
+        double distanceInMeters = await
+        Geolocator.distanceBetween(
+            lat, lng,
+            double.parse(data['latitude']), double.parse(data['longitude']));
+
         var lt = double.parse(data['latitude']);
-        var ln = double.parse(data['latitude']);
+        var ln = double.parse(data['longitude']);
 
         markersList.add(Marker(
             markerId: MarkerId(alertID),
@@ -153,7 +158,7 @@ class _CrimeAlertViewState extends State<CrimeAlertView> {
                       color: Colors.red,
                     ),
                     const Text(
-                      "Crime loactors",
+                      "Crime locators",
                       style: TextStyle(fontSize: 12),
                     )
                   ],
@@ -221,9 +226,9 @@ class _CrimeAlertViewState extends State<CrimeAlertView> {
                 borderRadius: BorderRadius.circular(20),
                 borderSide: const BorderSide(color: Colors.white))),
         components: [
-          Component(Component.country, "pk"),
+          
           Component(Component.country, "usa"),
-          Component(Component.country, "my")
+          Component(Component.country, "in")
         ]);
 
     displayPrediction(p!, homeScaffoldKey.currentState);
