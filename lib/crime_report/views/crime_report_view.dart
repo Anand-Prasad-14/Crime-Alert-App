@@ -26,7 +26,7 @@ class CrimeReportScreen extends StatefulWidget {
   State<CrimeReportScreen> createState() => _CrimeReportScreenState();
 }
 
-const kGoogleApiKey = 'AIzaSyBZFVz_dHpmtiJbjIyipcJgiCQ173xYylE';
+const kGoogleApiKey = '<GoogleMapApiKey>';
 
 class _CrimeReportScreenState extends State<CrimeReportScreen> {
   final _formKey = GlobalKey<FormState>();
