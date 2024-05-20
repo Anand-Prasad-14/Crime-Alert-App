@@ -41,7 +41,7 @@ class _HelpCenterViewState extends State<HelpCenterView> {
                           TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  getFAQItem("Homw to get the SOS menu bar?",
+                  getFAQItem("How to get the SOS menu bar?",
                       "SOS menu bar can be enabled by turning on switch in Accounts > Enable SOS Menu"),
                   getFAQItem("Why can't I comment on Posts",
                       "You will recieve an auto-reply from the Official Police email once your crime report is submitted.")

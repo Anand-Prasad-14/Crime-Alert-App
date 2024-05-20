@@ -12,11 +12,12 @@ AppBar customAppBar(
     title: Center(
         child: Text(
       title!,
+      textAlign: TextAlign.center,
       style: const TextStyle(
           color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24),
     )),
-    backgroundColor: Colors.red[900],
-    iconTheme: const IconThemeData(color: Colors.white),
+    backgroundColor: Colors.black,
+    iconTheme: const IconThemeData(color: Colors.white,size: 30),
     bottom: bottomBar,
   );
 }
@@ -35,7 +36,7 @@ AppBar customAppBarAction(
       style: const TextStyle(
           color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24),
     )),
-    backgroundColor: Colors.red.shade900,
+    backgroundColor: Colors.black,
     iconTheme: const IconThemeData(color: Colors.white),
     bottom: bottomBar,
     actions: [

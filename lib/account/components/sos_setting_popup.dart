@@ -94,7 +94,7 @@ class _SosSettingsPopUpState extends State<SosSettingsPopUp> {
       return Column(
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(right: 8.0),
+            padding: const EdgeInsets.only(right: 1.0),
             child: Row(
               children: <Widget>[
                 Checkbox(

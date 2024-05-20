@@ -169,13 +169,8 @@ class ThemeHelper {
                     child: icon,
                   )
                 : Container(),
-            Flexible(
-              fit: FlexFit.tight,
-              child: Text(
-                text!,
-                textAlign: TextAlign.center,
-              ),
-            )
+           Text(text!,
+           textAlign: TextAlign.center,)
           ]),
         ));
   }

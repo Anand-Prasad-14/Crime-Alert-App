@@ -13,7 +13,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: 'Home Page'),
+      appBar: customAppBar(title: 'India Alert',iconButton: const IconButton(onPressed: null, icon: Icon(Icons.location_pin,color: Colors.white54,)) ),
       // ignore: avoid_unnecessary_containers
       body: Container(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
         width: 176,
         height: 195,
         decoration: BoxDecoration(
-            color: Colors.red.shade900.withOpacity(0.1),
+            color: Colors.black.withOpacity(0.1),
             borderRadius: const BorderRadius.all(Radius.circular(10.0))),
         child: Padding(
           padding: const EdgeInsets.only(top: 15, bottom: 15, right: 5),
