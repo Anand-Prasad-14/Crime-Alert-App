@@ -1,6 +1,7 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 import 'package:flutter_sms/flutter_sms.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 
 import '../../service/global.dart';
@@ -9,33 +10,31 @@ import '../models/info_model.dart';
 
 class NotificationController {
   @pragma("vm:entry-point")
-  static Future<void> onNotificationCreateMethod(ReceivedNotification receivedNotification) async {
-
-  }
+  static Future<void> onNotificationCreateMethod(
+      ReceivedNotification receivedNotification) async {}
 
   @pragma("vm:entry-point")
-  static Future<void> onNotificationDisplayMethod(ReceivedNotification receivedNotification) async {
+  static Future<void> onNotificationDisplayMethod(
+      ReceivedNotification receivedNotification) async {}
 
-  }
-  
   @pragma("vm:entry-point")
-  static Future<void> onDismissActionReceiveMethod(ReceivedAction receivedAction) async {
+  static Future<void> onDismissActionReceiveMethod(
+      ReceivedAction receivedAction) async {}
 
-  }
-  
   @pragma("vm:entry-point")
-  static Future<void> dismissNotification()  async {
+  static Future<void> dismissNotification() async {
     AwesomeNotifications().dismiss(1);
   }
-  
+
   @pragma("vm:entry-point")
-  static Future<void> onActionReceivedMethod(ReceivedAction receivedAction) async{
+  static Future<void> onActionReceivedMethod(
+      ReceivedAction receivedAction) async {
     if (receivedAction.buttonKeyPressed == "fire") {
       _sendSMS(2);
     } else if (receivedAction.buttonKeyPressed == "police") {
       _sendSMS(1);
     } else if (receivedAction.buttonKeyPressed == "alarm") {
-      FlutterRingtonePlayer.play(fromAsset: "");
+      FlutterRingtonePlayer.play(fromAsset: "assets/alarm.mp3");
       alarmKey = 'stop';
       alarmVal = 'stop';
     } else if (receivedAction.buttonKeyPressed == "stop") {
@@ -50,12 +49,22 @@ class NotificationController {
   static String alarmVal = 'Ring';
 
   static Future<void> createSOSNotification() async {
-    await AwesomeNotifications().createNotification(content: NotificationContent(id: 1, channelKey: 'basic_channel', locked: true, title: 'SOS Menu Bar', notificationLayout: NotificationLayout.Default),
-    actionButtons: [
-      NotificationActionButton(key: 'fire', label: '${Emojis.wheater_fire} Fire SOS'),
-      NotificationActionButton(key: 'police', label:'${Emojis.symbols_sos_button} 911 SOS'),
-      NotificationActionButton(key: alarmKey, label: '${Emojis.sound_loudspeaker} $alarmVal Alarm')
-    ]);
+    await AwesomeNotifications().createNotification(
+        content: NotificationContent(
+            id: 1,
+            channelKey: 'basic_channel',
+            locked: true,
+            title: 'SOS Menu Bar',
+            notificationLayout: NotificationLayout.Default),
+        actionButtons: [
+          NotificationActionButton(
+              key: 'fire', label: '${Emojis.wheater_fire} Fire SOS'),
+          NotificationActionButton(
+              key: 'police', label: '${Emojis.symbols_sos_button} 911 SOS'),
+          NotificationActionButton(
+              key: alarmKey,
+              label: '${Emojis.sound_loudspeaker} $alarmVal Alarm')
+        ]);
   }
 
   //--SOS Message
@@ -69,24 +78,25 @@ class NotificationController {
     LocationPermission permission;
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if(!serviceEnabled){
+    if (!serviceEnabled) {
       throw Exception('Location services are disabled');
     }
 
     permission = await Geolocator.checkPermission();
-    if(permission == LocationPermission.denied){
+    if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
 
-      if (permission == LocationPermission.denied){
+      if (permission == LocationPermission.denied) {
         throw Exception("Location permission denied");
       }
     }
 
-    if (permission == LocationPermission.deniedForever){
+    if (permission == LocationPermission.deniedForever) {
       throw Exception('Location permission are permanently denied');
     }
 
-    return await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
   }
 
   static Future<void> getMessage(int type) async {
@@ -106,12 +116,12 @@ class NotificationController {
     return "Longitude: ${position.longitude} and Latitude: ${position.latitude}";
   }
 
-  static Future getInfo()async{
+  static Future getInfo() async {
     addtionalInfo = "";
     var data = await getSOSData(Global.instance.user!.uId!);
     print(data);
     List<Info> infoList = [];
-    if(data != null) {
+    if (data != null) {
       if (data["info"] != null) {
         data["info"].forEach((dt) {
           Map info = dt;
@@ -132,23 +142,23 @@ class NotificationController {
   }
 
   static Future<void> _sendSMS(int type) async {
-    List<String> recipents = ["+60163774255", "+601111954216"];
+    List<String> recipents = ["+919975877122", "+918390475926"];
 
     await getMessage(type).whenComplete(() {
-      getInfo()
-.whenComplete(() async {
-  recipents.addAll(contacts);
-  try {
-    String _result = await sendSMS(
-      message: "$initialMessage \n$message \n$addtionalInfo",
-      recipients: recipents,
-      sendDirect: true
-    );
-    print(_result);
-  } catch (onError) {
-    print(onError);
-  };
-});  
-  });
+      getInfo().whenComplete(() async {
+        recipents.addAll(contacts);
+        try {
+          String result = await sendSMS(
+              message: "$initialMessage \n$message \n$addtionalInfo",
+              recipients: recipents,
+              sendDirect: true);
+          print(result);
+          Fluttertoast.showToast(msg: "send message successfully!");
+        } catch (onError) {
+          print(onError);
+        }
+        ;
+      });
+    });
   }
 }
