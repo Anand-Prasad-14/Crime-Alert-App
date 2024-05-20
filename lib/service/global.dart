@@ -27,6 +27,9 @@ class Global {
     String? id = preferences.getString("userID");
     if (id != null) {
       Map userInfo = await getUserData(id);
+      /*if (_user != null) {
+      _user!.setUserInfo(id, userInfo);
+    }*/
       Global.instance.user!.setUserInfo(id, userInfo);
     }
   }
